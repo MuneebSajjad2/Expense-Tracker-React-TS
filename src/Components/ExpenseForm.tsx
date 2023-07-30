@@ -24,7 +24,7 @@ type ExpenseFormData = z.infer<typeof schema>
 
 const ExpenseForm = ({onSubmit} : Props) => {
      
-   const {register, handleSubmit, formState:{errors} } = useForm<ExpenseFormData>({resolver : zodResolver(schema)})
+   const {register, handleSubmit, formState:{errors, isValid} } = useForm<ExpenseFormData>({resolver : zodResolver(schema)})
 
 
   return (
@@ -54,7 +54,7 @@ const ExpenseForm = ({onSubmit} : Props) => {
                     </select>
                     {errors.category && <p className="text-danger">{errors.category.message}</p>}
                     </div>
-                    <div className="mb-3"><button className="btn btn-primary">Submit</button></div>
+                    <div className="mb-3"><button disabled={!isValid} className="btn btn-primary">Submit</button></div>
     </form>
   )
 }
